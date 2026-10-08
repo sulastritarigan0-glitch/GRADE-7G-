@@ -330,6 +330,14 @@ select:focus{
     border-color:#168ee8;
 }
 
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+    outline:3px solid #075da8;
+    outline-offset:2px;
+}
+
 textarea{
     resize:vertical;
     min-height:90px;
@@ -582,6 +590,7 @@ footer{
 
         <button
             class="active"
+            aria-current="page"
             onclick="showPage('home',this)"
         >
             Home
@@ -689,7 +698,7 @@ footer{
             id="studentId"
         >
 
-        <label>
+        <label for="studentName">
             Nama
         </label>
 
@@ -700,7 +709,7 @@ footer{
         >
 
 
-        <label>
+        <label for="studentPhoto">
             Foto
         </label>
 
@@ -715,12 +724,13 @@ footer{
             <img
                 id="studentPreview"
                 style="display:none;"
+                alt="Preview foto anggota"
             >
 
         </div>
 
 
-        <label>
+        <label for="studentBorder">
             Pilih Border Foto
         </label>
 
@@ -761,7 +771,7 @@ footer{
         </select>
 
 
-        <label>
+        <label for="studentDescription">
             Tentang Saya
         </label>
 
@@ -1114,9 +1124,11 @@ function showPage(page,button){
     document.querySelectorAll("nav button")
         .forEach(btn=>{
             btn.classList.remove("active");
+            btn.removeAttribute("aria-current");
         });
 
     button.classList.add("active");
+    button.setAttribute("aria-current","page");
 
     window.scrollTo({
         top:0,
